@@ -6,7 +6,7 @@ class IntroPage1 extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: Colors.blue[400],
+      color: const Color(0xFFFF8D6C),
       child: Center(
         child:
         Column(
@@ -18,7 +18,7 @@ class IntroPage1 extends StatelessWidget {
                 fontFamily:'AbrilFatface' ,
                 color: Colors.black,
                 fontSize: 30,
-                fontWeight: FontWeight.normal,
+                fontWeight: FontWeight.bold,
               ),
             ),
             const SizedBox(height: 10,),

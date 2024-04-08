@@ -4,6 +4,7 @@ import 'package:spendly/intro_screens/intro_page_1.dart';
 import 'package:spendly/intro_screens/intro_page_2.dart';
 import 'package:spendly/intro_screens/intro_page_3.dart';
 import 'package:spendly/screens/home/views/home_screen.dart';
+import 'package:spendly/sign%20in/login_page.dart';
 
 class OnBoardingScreen extends StatefulWidget {
   const OnBoardingScreen({super.key});
@@ -52,7 +53,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                           _controller.jumpToPage(2);
                         },
 
-                        child: const Text('Skip',style:TextStyle(fontFamily: 'AbrilFatface',fontSize: 20,),)),
+                        child: const Text('Skip',style:TextStyle(fontFamily: 'AbrilFatface',fontSize: 20,fontWeight: FontWeight.bold),)),
 
                     //dot indicator
                     SmoothPageIndicator(controller: _controller, count: 3),
@@ -63,13 +64,13 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                         Navigator.push(
                           context,
                           MaterialPageRoute(builder: (context) {
-                            return const HomeScreen();
+                            return  LoginPage();
                           }),
                         );
                       },
 
                       child: const Text('Done',
-                        style:TextStyle(fontFamily: 'AbrilFatface',fontSize: 20,),
+                        style:TextStyle(fontFamily: 'AbrilFatface',fontSize: 20,fontWeight: FontWeight.bold),
                       ),
                     )
                         : GestureDetector(
@@ -78,7 +79,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                             curve: Curves.easeIn);
                       },
                       child: const Text('Next',style:TextStyle(fontFamily: 'AbrilFatface',
-                        fontSize: 20,),),)
+                        fontSize: 20,fontWeight: FontWeight.bold),),)
                   ],
                 ))
           ],

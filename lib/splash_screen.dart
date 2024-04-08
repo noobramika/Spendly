@@ -41,7 +41,7 @@ class _SplashScreenState extends State<SplashScreen> {
         width: double.infinity,
         decoration: const BoxDecoration(
           gradient: LinearGradient(
-            colors: [Colors.blue, Colors.white],
+            colors: [Colors.orangeAccent, Colors.pinkAccent, Colors.blueAccent],
             begin: Alignment.topRight,
             end: Alignment.bottomLeft,
           ),
@@ -53,8 +53,8 @@ class _SplashScreenState extends State<SplashScreen> {
               borderRadius: BorderRadius.circular(40), // Adjust the radius to match your preference
               child: Image.asset(
                 "assets/WhatsApp Image 2024-04-08 at 14.10.31_78b5cd06.jpg",
-                width: 100,
-                height: 100,
+                width: 150,
+                height: 150,
               ),
             ),
             const SizedBox(height: 20),
@@ -65,8 +65,9 @@ class _SplashScreenState extends State<SplashScreen> {
                     text: 'Spendly',
                     style: TextStyle(
                       fontFamily: 'AbrilFatface',
-                      color: Colors.black,
+                      color: Colors.white70,
                       fontSize: 50,
+                      fontWeight: FontWeight.bold
                     ),
                   ),
                 ],
