@@ -160,7 +160,7 @@ class _AddExpenseState extends State<AddExpense> {
                                               )
                                             ),
                                         child: GridView.builder(
-                                          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                                          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                                             crossAxisCount: 3,
                                           ),
                                           itemCount: myCategoriesIcons.length,

@@ -1,11 +1,14 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:spendly/companents/my_button.dart';
 import 'package:spendly/companents/my_textfield.dart';
 import 'package:spendly/companents/square_tile.dart';
+import 'package:spendly/screens/home/views/home_screen.dart';
+import 'package:spendly/services/auth.dart';
 import 'package:spendly/sign%20in/login_page.dart';
 
 class RegisterPage extends StatelessWidget {
-   RegisterPage({Key? key}) : super(key: key);
+  RegisterPage({super.key});
 
   // Text editing controllers
   final emailController = TextEditingController();
@@ -13,14 +16,23 @@ class RegisterPage extends StatelessWidget {
   final passwordController = TextEditingController();
   final confirmPasswordController = TextEditingController();
 
-  // Sign user up method
-  void signUserUp(BuildContext context) {
-    // Perform sign up logic here, without Firebase
-    // For demonstration, let's just print the user's information
-    print('Name: ${nameController.text}, Email: ${emailController.text}, Password: ${passwordController.text}');
+  final RegExp emailRegExp = RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$');
 
-    // Show success message
-    showSuccessMessage(context);
+  bool validateFields() {
+    if (nameController.text.isEmpty ||
+        !emailRegExp.hasMatch(emailController.text) ||
+        passwordController.text.isEmpty ||
+        confirmPasswordController.text.isEmpty) {
+      debugPrint('Please fill all fields correctly.');
+      return false;
+    }
+
+    if (passwordController.text != confirmPasswordController.text) {
+      debugPrint('Passwords do not match.');
+      return false;
+    }
+
+    return true;
   }
 
   void showSuccessMessage(BuildContext context) {
@@ -112,7 +124,27 @@ class RegisterPage extends StatelessWidget {
                 // Sign up button
                 MyButton(
                   text: "Sign Up",
-                  onTap: () => signUserUp(context),
+                  onTap: () async {
+                    if (validateFields()) {
+                      dynamic result = await AuthService()
+                          .registerWithEmailAndPassword(
+                              emailController.text, passwordController.text);
+                      if (result) {
+                        Navigator.pushReplacement(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => const HomeScreen(),
+                          ),
+                        );
+                      }
+                      await FirebaseFirestore.instance
+                          .collection('Users')
+                          .doc(emailController.text)
+                          .set({
+                        'name': nameController.text,
+                      });
+                    }
+                  },
                 ),
 
                 const SizedBox(height: 20),
@@ -166,7 +198,10 @@ class RegisterPage extends StatelessWidget {
                     const SizedBox(width: 4),
                     GestureDetector(
                       onTap: () {
-                        Navigator.push(context, MaterialPageRoute(builder: (context) =>  LoginPage()));
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => LoginPage()));
                       },
                       child: const Text(
                         'Login Now',

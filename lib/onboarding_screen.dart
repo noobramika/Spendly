@@ -3,7 +3,6 @@ import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import 'package:spendly/intro_screens/intro_page_1.dart';
 import 'package:spendly/intro_screens/intro_page_2.dart';
 import 'package:spendly/intro_screens/intro_page_3.dart';
-import 'package:spendly/screens/home/views/home_screen.dart';
 import 'package:spendly/sign%20in/login_page.dart';
 
 class OnBoardingScreen extends StatefulWidget {

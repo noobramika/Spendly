@@ -7,7 +7,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-
+import 'package:spendly/app.dart';
 import 'package:spendly/main.dart';
 
 void main() {

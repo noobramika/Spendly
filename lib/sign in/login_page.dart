@@ -3,26 +3,19 @@ import 'package:spendly/companents/my_button.dart';
 import 'package:spendly/companents/my_textfield.dart';
 import 'package:spendly/companents/square_tile.dart';
 import 'package:spendly/screens/home/views/home_screen.dart';
+import 'package:spendly/services/auth.dart';
 import 'package:spendly/sign%20in/forgot_pw_page.dart';
-import 'package:spendly/sign%20in/register_page.dart'; // Add import for RegisterPage
+import 'package:spendly/sign%20in/register_page.dart';
+
+// Add import for RegisterPage
 
 class LoginPage extends StatelessWidget {
+LoginPage({super.key});
+
+
   // Text editing controllers
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
-
-  // Sign user in method
-  void signUserIn(BuildContext context) {
-    // Perform sign in logic here, without Firebase
-    // For demonstration, let's just print the email and password
-    print('Email: ${emailController.text}, Password: ${passwordController.text}');
-
-    // Navigate to the home page after successful sign-in
-    Navigator.pushReplacement(
-      context,
-      MaterialPageRoute(builder: (context) => const HomeScreen()),
-    );
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -85,7 +78,7 @@ class LoginPage extends StatelessWidget {
                               builder: (context) {
                                 return const ForgotPasswordPage();
                               },
-                              ),
+                            ),
                           );
                         },
                         child: const Text(
@@ -104,9 +97,20 @@ class LoginPage extends StatelessWidget {
 
                 // Signin button
                 MyButton(
-                  text: "Sign In",
-                  onTap: () => signUserIn(context),
-                ),
+                    text: "Sign In",
+                    onTap: () async {
+                      dynamic result = await AuthService()
+                          .signInWithEmailAndPassword(
+                              emailController.text, passwordController.text);
+                      if (result != null) {
+                        Navigator.pushReplacement(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => const HomeScreen(),
+                          ),
+                        );
+                      }
+                    }),
 
                 const SizedBox(height: 30),
 
@@ -122,8 +126,7 @@ class LoginPage extends StatelessWidget {
                         ),
                       ),
                       Padding(
-                        padding:
-                            const EdgeInsets.symmetric(horizontal: 10.0),
+                        padding: const EdgeInsets.symmetric(horizontal: 10.0),
                         child: Text(
                           'Or Continue with',
                           style: TextStyle(
@@ -147,8 +150,7 @@ class LoginPage extends StatelessWidget {
                 const Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    SquareTile(imagePath: 'assets/google.png'),
-                  ],
+                    SquareTile(imagePath: 'assets/google.png')],
                 ),
 
                 const SizedBox(height: 10),
@@ -161,7 +163,10 @@ class LoginPage extends StatelessWidget {
                     const SizedBox(width: 4),
                     GestureDetector(
                       onTap: () {
-                        Navigator.push(context, MaterialPageRoute(builder: (context) =>  RegisterPage()));
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => RegisterPage()));
                       },
                       child: const Text(
                         'Register Now',
