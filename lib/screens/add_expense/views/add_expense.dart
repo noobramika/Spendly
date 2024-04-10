@@ -265,8 +265,7 @@ class _AddExpenseState extends State<AddExpense> {
                 height: kToolbarHeight,
                 child: TextButton(
                     onPressed: () {
-                      DatabaseService().addExpenses(expenseController.text,
-                          categoryController.text, dateController.text);
+                      //DatabaseService().addExpenses(expenseController.text,categoryController.text, dateController.text);
                     },
                     style: TextButton.styleFrom(
                         backgroundColor: Colors.black,
