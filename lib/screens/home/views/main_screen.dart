@@ -2,13 +2,18 @@ import 'dart:math';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
+import 'package:spendly/companents/name_widget.dart';
 import 'package:spendly/data/data.dart';
 
-class MainScreen extends StatelessWidget {
+class MainScreen extends StatefulWidget {
   const MainScreen({super.key});
 
+  @override
+  State<MainScreen> createState() => _MainScreenState();
+}
+
+class _MainScreenState extends State<MainScreen> {
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -50,14 +55,7 @@ class MainScreen extends StatelessWidget {
                             color: Theme.of(context).colorScheme.outline
                           ),
                         ),
-                        Text(
-                            "Mohammed",
-                          style: TextStyle(
-                              fontSize: 18,
-                              fontWeight: FontWeight.bold,
-                              color: Theme.of(context).colorScheme.onBackground
-                          ),
-                        )
+                        NameWidget(),
                       ],
                     ),
                   ],

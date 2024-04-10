@@ -1,19 +1,27 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:spendly/companents/my_button.dart';
 import 'package:spendly/companents/my_textfield.dart';
 import 'package:spendly/companents/square_tile.dart';
 import 'package:spendly/screens/home/views/home_screen.dart';
 import 'package:spendly/services/auth.dart';
+import 'package:spendly/services/database.dart';
 import 'package:spendly/sign%20in/login_page.dart';
 
-class RegisterPage extends StatelessWidget {
-  RegisterPage({super.key});
+class RegisterPage extends StatefulWidget {
+  const RegisterPage({super.key});
 
+  @override
+  State<RegisterPage> createState() => _RegisterPageState();
+}
+
+class _RegisterPageState extends State<RegisterPage> {
   // Text editing controllers
   final emailController = TextEditingController();
+
   final nameController = TextEditingController();
+
   final passwordController = TextEditingController();
+
   final confirmPasswordController = TextEditingController();
 
   final RegExp emailRegExp = RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$');
@@ -130,6 +138,8 @@ class RegisterPage extends StatelessWidget {
                           .registerWithEmailAndPassword(
                               emailController.text, passwordController.text);
                       if (result) {
+                        DatabaseService()
+                            .addUser(nameController.text);
                         Navigator.pushReplacement(
                           context,
                           MaterialPageRoute(
@@ -137,12 +147,6 @@ class RegisterPage extends StatelessWidget {
                           ),
                         );
                       }
-                      await FirebaseFirestore.instance
-                          .collection('Users')
-                          .doc(emailController.text)
-                          .set({
-                        'name': nameController.text,
-                      });
                     }
                   },
                 ),
