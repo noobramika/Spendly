@@ -53,5 +53,11 @@ class AuthService {
     await _auth.signOut();
     await GoogleSignIn().signOut();
   }
+
+  Future resetPassword(String email) async {
+    await FirebaseAuth.instance.sendPasswordResetEmail(
+      email: email,
+    );
+  }
   
 }
